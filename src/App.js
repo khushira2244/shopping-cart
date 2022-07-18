@@ -9,16 +9,16 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
+      products: data.products,
       cartItems: localStorage.getItem('cartItems')
         ? JSON.parse(localStorage.getItem('cartItems'))
         : [],
-      products: data.products,
       size: '',
       sort: '',
     }
   }
   createOrder = (order) => {
-    alert('Need to save save order for' + order.name)
+    alert('Need to save order for ' + order.name)
   }
   removeFromCart = (product) => {
     const cartItems = this.state.cartItems.slice()
@@ -98,14 +98,18 @@ class App extends React.Component {
                 filterProducts={this.filterProducts}
                 sortProducts={this.sortProducts}
               ></Filter>
-              <Products products={this.state.products}></Products>
+              <Products
+                products={this.state.products}
+                addToCart={this.addToCart}
+              ></Products>
+            </div>
+            <div className="sidebar">
               <Cart
                 cartItems={this.state.cartItems}
                 removeFromCart={this.removeFromCart}
                 createOrder={this.createOrder}
               />
             </div>
-            <div className="sidebar">Cart Items</div>
           </div>
         </main>
         <footer>All right is reserved.</footer>
